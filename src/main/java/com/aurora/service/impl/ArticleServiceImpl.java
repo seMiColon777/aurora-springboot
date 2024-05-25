@@ -51,8 +51,6 @@ import static com.aurora.enums.StatusCodeEnum.ARTICLE_ACCESS_FAIL;
 @Service
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService {
 
-    private static final Logger logger = LoggerFactory.getLogger(ArticleServiceImpl.class);
-
     @Autowired
     private ArticleMapper articleMapper;
 

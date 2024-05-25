@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static com.aurora.constant.CommonConstant.TRUE;
 import static com.aurora.constant.RabbitMQConstant.SUBSCRIBE_QUEUE;

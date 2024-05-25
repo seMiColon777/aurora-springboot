@@ -3,7 +3,6 @@ package com.aurora.handler;
 import com.alibaba.fastjson.JSON;
 import com.aurora.constant.CommonConstant;
 import com.aurora.model.vo.ResultVO;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.AuthenticationException;
