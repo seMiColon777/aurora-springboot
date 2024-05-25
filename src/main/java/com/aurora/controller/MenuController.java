@@ -29,8 +29,8 @@ public class MenuController {
     /**
      * 查看菜单列表
      *
-     * @param conditionVO
-     * @return
+     * @param conditionVO conditionVO
+     * @return ResultVO
      */
     @GetMapping("/admin/menus")
     public ResultVO<List<MenuDTO>> listMenus(ConditionVO conditionVO) {
@@ -40,8 +40,8 @@ public class MenuController {
     /**
      * 新增或修改菜单
      *
-     * @param menuVO
-     * @return
+     * @param menuVO menuVO
+     * @return ResultVO
      */
     @OptLog(optType =SAVE_OR_UPDATE)
     @PostMapping("/admin/menus")
@@ -53,8 +53,8 @@ public class MenuController {
     /**
      * 修改目录是否隐藏
      *
-     * @param isHiddenVO
-     * @return
+     * @param isHiddenVO isHiddenVO
+     * @return ResultVO
      */
     @OptLog(optType = UPDATE)
     @PutMapping("/admin/menus/isHidden")
@@ -66,8 +66,8 @@ public class MenuController {
     /**
      * 删除菜单
      *
-     * @param menuId
-     * @return
+     * @param menuId menuId
+     * @return ResultVO
      */
     @OptLog(optType = DELETE)
     @DeleteMapping("/admin/menus/{menuId}")
@@ -79,7 +79,7 @@ public class MenuController {
     /**
      * 查看角色菜单选项
      *
-     * @return
+     * @return ResultVO
      */
     @GetMapping("/admin/role/menus")
     public ResultVO<List<LabelOptionDTO>> listMenuOptions() {
@@ -89,7 +89,7 @@ public class MenuController {
     /**
      * 查看当前用户菜单
      *
-     * @return
+     * @return ResultVO
      */
     @GetMapping("/admin/user/menus")
     public ResultVO<List<UserMenuDTO>> listUserMenus() {

@@ -3,6 +3,8 @@ package com.aurora.util;
 import com.aurora.model.dto.EmailDTO;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -13,6 +15,8 @@ import org.thymeleaf.context.Context;
 
 @Component
 public class EmailUtil {
+
+    private static final Logger logger = LoggerFactory.getLogger(EmailUtil.class);
 
     @Value("${spring.mail.username}")
     private String email;
@@ -36,7 +40,7 @@ public class EmailUtil {
             mimeMessageHelper.setText(process, true);
             javaMailSender.send(mimeMessage);
         } catch (MessagingException e) {
-            e.printStackTrace();
+            logger.error("sendHtmlMail error", e);
         }
     }
 

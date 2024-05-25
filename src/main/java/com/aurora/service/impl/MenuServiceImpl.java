@@ -58,7 +58,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
             List<MenuDTO> childrenDTOList = childrenList.stream()
                     .map(item -> BeanCopyUtil.copyObject(item, MenuDTO.class))
                     .sorted(Comparator.comparing(MenuDTO::getOrderNum))
-                    .collect(Collectors.toList());
+                    .toList();
             menuDTOs.addAll(childrenDTOList);
         }
         return menuDTOs;

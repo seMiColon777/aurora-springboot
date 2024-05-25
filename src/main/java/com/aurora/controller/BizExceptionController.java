@@ -15,7 +15,7 @@ public class BizExceptionController {
     /**
      * 处理BizException
      *
-     * @param request
+     * @param request request
      */
     @SneakyThrows
     @RequestMapping("/bizException")

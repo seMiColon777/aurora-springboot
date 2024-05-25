@@ -29,7 +29,7 @@ public class CategoryController {
     /**
      * 获取所有分类
      *
-     * @return
+     * @return ResultVO
      */
     @GetMapping("/categories/all")
     public ResultVO<List<CategoryDTO>> listCategories() {
@@ -39,8 +39,8 @@ public class CategoryController {
     /**
      * 查看后台分类列表
      *
-     * @param conditionVO
-     * @return
+     * @param conditionVO conditionVO
+     * @return ResultVO
      */
     @GetMapping("/admin/categories")
     public ResultVO<PageResultDTO<CategoryAdminDTO>> listCategoriesAdmin(ConditionVO conditionVO) {
@@ -50,8 +50,8 @@ public class CategoryController {
     /**
      * 搜索文章分类
      *
-     * @param conditionVO
-     * @return
+     * @param conditionVO conditionVO
+     * @return ResultVO
      */
     @GetMapping("/admin/categories/search")
     public ResultVO<List<CategoryOptionDTO>> listCategoriesAdminBySearch(ConditionVO conditionVO) {
@@ -61,8 +61,8 @@ public class CategoryController {
     /**
      * 删除分类
      *
-     * @param categoryIds
-     * @return
+     * @param categoryIds categoryIds
+     * @return ResultVO
      */
     @OptLog(optType = DELETE)
     @DeleteMapping("/admin/categories")
@@ -74,8 +74,8 @@ public class CategoryController {
     /**
      * 添加或修改分类
      *
-     * @param categoryVO
-     * @return
+     * @param categoryVO categoryVO
+     * @return ResultVO
      */
     @OptLog(optType = SAVE_OR_UPDATE)
     @PostMapping("/admin/categories")

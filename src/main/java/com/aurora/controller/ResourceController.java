@@ -27,8 +27,8 @@ public class ResourceController {
     /**
      * 查看资源列表
      *
-     * @param conditionVO
-     * @return
+     * @param conditionVO conditionVO
+     * @return ResultVO
      */
     @GetMapping("/admin/resources")
     public ResultVO<List<ResourceDTO>> listResources(ConditionVO conditionVO) {
@@ -38,8 +38,8 @@ public class ResourceController {
     /**
      * 删除资源
      *
-     * @param resourceId
-     * @return
+     * @param resourceId resourceId
+     * @return ResultVO
      */
     @OptLog(optType = DELETE)
     @DeleteMapping("/admin/resources/{resourceId}")
@@ -51,8 +51,8 @@ public class ResourceController {
     /**
      * 新增或修改资源
      *
-     * @param resourceVO
-     * @return
+     * @param resourceVO resourceVO
+     * @return ResultVO
      */
     @OptLog(optType = SAVE_OR_UPDATE)
     @PostMapping("/admin/resources")
@@ -64,7 +64,7 @@ public class ResourceController {
     /**
      * 查看角色资源选项
      *
-     * @return
+     * @return ResultVO
      */
     @GetMapping("/admin/role/resources")
     public ResultVO<List<LabelOptionDTO>> listResourceOption() {

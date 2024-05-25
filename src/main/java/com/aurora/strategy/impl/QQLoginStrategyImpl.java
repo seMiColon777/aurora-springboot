@@ -11,6 +11,8 @@ import com.aurora.enums.LoginTypeEnum;
 import com.aurora.exception.BizException;
 import com.aurora.util.CommonUtil;
 import com.aurora.model.vo.QQLoginVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -24,6 +26,8 @@ import static com.aurora.enums.StatusCodeEnum.QQ_LOGIN_ERROR;
 
 @Service("qqLoginStrategyImpl")
 public class QQLoginStrategyImpl extends AbstractSocialLoginStrategyImpl {
+
+    private static final Logger logger = LoggerFactory.getLogger(QQLoginStrategyImpl.class);
 
     @Autowired
     private QQConfigProperties qqConfigProperties;
@@ -65,7 +69,7 @@ public class QQLoginStrategyImpl extends AbstractSocialLoginStrategyImpl {
                 throw new BizException(QQ_LOGIN_ERROR);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("checkQQToken error", e);
             throw new BizException(QQ_LOGIN_ERROR);
         }
     }

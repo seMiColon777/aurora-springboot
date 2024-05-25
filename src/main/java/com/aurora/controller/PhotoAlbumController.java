@@ -1,15 +1,15 @@
 package com.aurora.controller;
 
 import com.aurora.annotation.OptLog;
+import com.aurora.enums.FilePathEnum;
+import com.aurora.model.dto.PageResultDTO;
 import com.aurora.model.dto.PhotoAlbumAdminDTO;
 import com.aurora.model.dto.PhotoAlbumDTO;
-import com.aurora.enums.FilePathEnum;
+import com.aurora.model.vo.ConditionVO;
+import com.aurora.model.vo.PhotoAlbumVO;
 import com.aurora.model.vo.ResultVO;
 import com.aurora.service.PhotoAlbumService;
 import com.aurora.strategy.context.UploadStrategyContext;
-import com.aurora.model.vo.ConditionVO;
-import com.aurora.model.dto.PageResultDTO;
-import com.aurora.model.vo.PhotoAlbumVO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +36,7 @@ public class PhotoAlbumController {
      * 上传相册封面
      *
      * @param file 相册封面
-     * @return
+     * @return ResultVO
      */
     @OptLog(optType = UPLOAD)
     @PostMapping("/admin/photos/albums/upload")
@@ -47,8 +47,8 @@ public class PhotoAlbumController {
     /**
      * 保存或更新相册
      *
-     * @param photoAlbumVO
-     * @return
+     * @param photoAlbumVO photoAlbumVO
+     * @return ResultVO
      */
     @OptLog(optType = SAVE_OR_UPDATE)
     @PostMapping("/admin/photos/albums")
@@ -60,8 +60,8 @@ public class PhotoAlbumController {
     /**
      * 查看后台相册列表
      *
-     * @param conditionVO
-     * @return
+     * @param conditionVO conditionVO
+     * @return ResultVO
      */
     @GetMapping("/admin/photos/albums")
     public ResultVO<PageResultDTO<PhotoAlbumAdminDTO>> listPhotoAlbumBacks(ConditionVO conditionVO) {
@@ -71,7 +71,7 @@ public class PhotoAlbumController {
     /**
      * 获取后台相册列表信息
      *
-     * @return
+     * @return ResultVO
      */
     @GetMapping("/admin/photos/albums/info")
     public ResultVO<List<PhotoAlbumDTO>> listPhotoAlbumBackInfos() {
@@ -82,7 +82,7 @@ public class PhotoAlbumController {
      * 根据id获取后台相册信息
      *
      * @param albumId 相册id
-     * @return
+     * @return ResultVO
      */
     @GetMapping("/admin/photos/albums/{albumId}/info")
     public ResultVO<PhotoAlbumAdminDTO> getPhotoAlbumBackById(@PathVariable("albumId") Integer albumId) {
@@ -93,7 +93,7 @@ public class PhotoAlbumController {
      * 根据id删除相册
      *
      * @param albumId 相册id
-     * @return
+     * @return ResultVO
      */
     @OptLog(optType = DELETE)
     @DeleteMapping("/admin/photos/albums/{albumId}")
@@ -105,7 +105,7 @@ public class PhotoAlbumController {
     /**
      * 获取相册列表
      *
-     * @return
+     * @return ResultVO
      */
     @GetMapping("/photos/albums")
     public ResultVO<List<PhotoAlbumDTO>> listPhotoAlbums() {

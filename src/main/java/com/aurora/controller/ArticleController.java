@@ -1,12 +1,12 @@
 package com.aurora.controller;
 
 import com.aurora.annotation.OptLog;
-import com.aurora.model.dto.*;
 import com.aurora.enums.FilePathEnum;
+import com.aurora.model.dto.*;
+import com.aurora.model.vo.*;
 import com.aurora.service.ArticleService;
 import com.aurora.strategy.context.ArticleImportStrategyContext;
 import com.aurora.strategy.context.UploadStrategyContext;
-import com.aurora.model.vo.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +34,7 @@ public class ArticleController {
     /**
      * 获取置顶和推荐文章
      *
-     * @return
+     * @return ResultVO
      */
     @GetMapping("/articles/topAndFeatured")
     public ResultVO<TopAndFeaturedArticlesDTO> listTopAndFeaturedArticles() {
@@ -44,7 +44,7 @@ public class ArticleController {
     /**
      * 获取所有文章
      *
-     * @return
+     * @return ResultVO
      */
     @GetMapping("/articles/all")
     public ResultVO<PageResultDTO<ArticleCardDTO>> listArticles() {
@@ -54,8 +54,8 @@ public class ArticleController {
     /**
      * 根据分类id获取文章
      *
-     * @param categoryId
-     * @return
+     * @param categoryId categoryId
+     * @return ResultVO
      */
     @GetMapping("/articles/categoryId")
     public ResultVO<PageResultDTO<ArticleCardDTO>> getArticlesByCategoryId(@RequestParam Integer categoryId) {
@@ -65,8 +65,8 @@ public class ArticleController {
     /**
      * 根据id获取文章
      *
-     * @param articleId
-     * @return
+     * @param articleId articleId
+     * @return ResultVO
      */
     @GetMapping("/articles/{articleId}")
     public ResultVO<ArticleDTO> getArticleById(@PathVariable("articleId") Integer articleId) {
@@ -76,8 +76,8 @@ public class ArticleController {
     /**
      * 校验文章访问密码
      *
-     * @param articlePasswordVO
-     * @return
+     * @param articlePasswordVO articlePasswordVO
+     * @return ResultVO
      */
     @PostMapping("/articles/access")
     public ResultVO<?> accessArticle(@Valid @RequestBody ArticlePasswordVO articlePasswordVO) {
@@ -88,8 +88,8 @@ public class ArticleController {
     /**
      * 根据标签id获取文章
      *
-     * @param tagId
-     * @return
+     * @param tagId tagId
+     * @return ResultVO
      */
     @GetMapping("/articles/tagId")
     public ResultVO<PageResultDTO<ArticleCardDTO>> listArticlesByTagId(@RequestParam Integer tagId) {
@@ -99,7 +99,7 @@ public class ArticleController {
     /**
      * 获取所有文章归档
      *
-     * @return
+     * @return ResultVO
      */
     @GetMapping("/archives/all")
     public ResultVO<PageResultDTO<ArchiveDTO>> listArchives() {
@@ -109,8 +109,8 @@ public class ArticleController {
     /**
      * 获取后台文章
      *
-     * @param conditionVO
-     * @return
+     * @param conditionVO conditionVO
+     * @return ResultVO
      */
     @GetMapping("/admin/articles")
     public ResultVO<PageResultDTO<ArticleAdminDTO>> listArticlesAdmin(ConditionVO conditionVO) {
@@ -120,8 +120,8 @@ public class ArticleController {
     /**
      * 保存和修改文章
      *
-     * @param articleVO
-     * @return
+     * @param articleVO articleVO
+     * @return ResultVO
      */
     @OptLog(optType = SAVE_OR_UPDATE)
     @PostMapping("/admin/articles")
@@ -133,8 +133,8 @@ public class ArticleController {
     /**
      * 修改文章是否置顶和推荐
      *
-     * @param articleTopFeaturedVO
-     * @return
+     * @param articleTopFeaturedVO articleTopFeaturedVO
+     * @return ResultVO
      */
     @OptLog(optType = UPDATE)
     @PutMapping("/admin/articles/topAndFeatured")
@@ -146,8 +146,8 @@ public class ArticleController {
     /**
      * 删除或者恢复文章
      *
-     * @param deleteVO
-     * @return
+     * @param deleteVO deleteVO
+     * @return ResultVO
      */
     @PutMapping("/admin/articles")
     public ResultVO<?> updateArticleDelete(@Valid @RequestBody DeleteVO deleteVO) {
@@ -158,8 +158,8 @@ public class ArticleController {
     /**
      * 物理删除文章
      *
-     * @param articleIds
-     * @return
+     * @param articleIds articleIds
+     * @return ResultVO
      */
     @OptLog(optType = DELETE)
     @DeleteMapping("/admin/articles/delete")
@@ -172,7 +172,7 @@ public class ArticleController {
      * 上传文章图片
      *
      * @param file 文章图片
-     * @return
+     * @return ResultVO
      */
     @OptLog(optType = UPLOAD)
     @PostMapping("/admin/articles/images")
@@ -184,7 +184,7 @@ public class ArticleController {
      * 根据id查看后台文章
      *
      * @param articleId 文章id
-     * @return
+     * @return ResultVO
      */
     @GetMapping("/admin/articles/{articleId}")
     public ResultVO<ArticleAdminViewDTO> getArticleBackById(@PathVariable("articleId") Integer articleId) {
@@ -194,9 +194,9 @@ public class ArticleController {
     /**
      * 导入文章
      *
-     * @param file
-     * @param type
-     * @return
+     * @param file 文件
+     * @param type 类型
+     * @return ResultVO
      */
     @OptLog(optType = UPLOAD)
     @PostMapping("/admin/articles/import")
@@ -209,7 +209,7 @@ public class ArticleController {
      * 导出文章
      *
      * @param articleIds 文章id
-     * @return
+     * @return ResultVO
      */
     @OptLog(optType = EXPORT)
     @PostMapping("/admin/articles/export")
@@ -220,8 +220,8 @@ public class ArticleController {
     /**
      * 搜索文章
      *
-     * @param condition
-     * @return
+     * @param condition 搜索条件
+     * @return ResultVO
      */
     @GetMapping("/articles/search")
     public ResultVO<List<ArticleSearchDTO>> listArticlesBySearch(ConditionVO condition) {

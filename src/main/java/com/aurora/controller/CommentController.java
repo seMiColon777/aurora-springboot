@@ -28,8 +28,8 @@ public class CommentController {
     /**
      * 添加评论
      *
-     * @param commentVO
-     * @return
+     * @param commentVO commentVO
+     * @return ResultVO
      */
     @AccessLimit(seconds = 60, maxCount = 3)
     @OptLog(optType = SAVE)
@@ -42,8 +42,8 @@ public class CommentController {
     /**
      * 获取评论
      *
-     * @param commentVO
-     * @return
+     * @param commentVO commentVO
+     * @return ResultVO
      */
     @GetMapping("/comments")
     public ResultVO<PageResultDTO<CommentDTO>> getComments(CommentVO commentVO) {
@@ -53,8 +53,8 @@ public class CommentController {
     /**
      * 根据commentId获取回复
      *
-     * @param commentId
-     * @return
+     * @param commentId commentId
+     * @return ResultVO
      */
     @GetMapping("/comments/{commentId}/replies")
     public ResultVO<List<ReplyDTO>> listRepliesByCommentId(@PathVariable("commentId") Integer commentId) {
@@ -64,7 +64,7 @@ public class CommentController {
     /**
      * 获取前六个评论
      *
-     * @return
+     * @return ResultVO
      */
     @GetMapping("/comments/topSix")
     public ResultVO<List<CommentDTO>> listTopSixComments() {
@@ -74,8 +74,8 @@ public class CommentController {
     /**
      * 查询后台评论
      *
-     * @param conditionVO
-     * @return
+     * @param conditionVO conditionVO
+     * @return ResultVO
      */
     @GetMapping("/admin/comments")
     public ResultVO<PageResultDTO<CommentAdminDTO>> listCommentBackDTO(ConditionVO conditionVO) {
@@ -85,8 +85,8 @@ public class CommentController {
     /**
      * 审核评论
      *
-     * @param reviewVO
-     * @return
+     * @param reviewVO reviewVO
+     * @return ResultVO
      */
     @OptLog(optType = UPDATE)
     @PutMapping("/admin/comments/review")
@@ -98,8 +98,8 @@ public class CommentController {
     /**
      * 删除评论
      *
-     * @param commentIdList
-     * @return
+     * @param commentIdList commentIdList
+     * @return ResultVO
      */
     @OptLog(optType = DELETE)
     @DeleteMapping("/admin/comments")

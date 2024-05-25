@@ -34,7 +34,6 @@ public class OperationLogAspect {
     }
 
     @AfterReturning(value = "operationLogPointCut()", returning = "keys")
-    @SuppressWarnings("unchecked")
     public void saveOperationLog(JoinPoint joinPoint, Object keys) {
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = (HttpServletRequest) Objects.requireNonNull(requestAttributes).resolveReference(RequestAttributes.REFERENCE_REQUEST);

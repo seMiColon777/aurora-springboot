@@ -28,8 +28,8 @@ public class ExceptionLogController {
     /**
      * 获取异常日志
      *
-     * @param conditionVO
-     * @return
+     * @param conditionVO conditionVO
+     * @return ResultVO
      */
     @GetMapping("/admin/exception/logs")
     public ResultVO<PageResultDTO<ExceptionLogDTO>> listExceptionLogs(ConditionVO conditionVO) {
@@ -39,8 +39,8 @@ public class ExceptionLogController {
     /**
      * 删除异常日志
      *
-     * @param exceptionLogIds
-     * @return
+     * @param exceptionLogIds exceptionLogIds
+     * @return ResultVO
      */
     @OptLog(optType = DELETE)
     @DeleteMapping("/admin/exception/logs")

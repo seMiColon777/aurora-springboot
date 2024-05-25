@@ -44,7 +44,7 @@ public class SubscribeConsumer {
         Integer articleId = JSON.parseObject(new String(data), Integer.class);
         Article article = articleService.getOne(new LambdaQueryWrapper<Article>().eq(Article::getId, articleId));
         List<UserInfo> users = userInfoService.list(new LambdaQueryWrapper<UserInfo>().eq(UserInfo::getIsSubscribe, TRUE));
-        List<String> emails = users.stream().map(UserInfo::getEmail).collect(Collectors.toList());
+        List<String> emails = users.stream().map(UserInfo::getEmail).toList();
         for (String email : emails) {
             EmailDTO emailDTO = new EmailDTO();
             Map<String, Object> map = new HashMap<>();

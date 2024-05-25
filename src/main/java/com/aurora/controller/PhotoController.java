@@ -33,7 +33,7 @@ public class PhotoController {
      * 上传照片
      *
      * @param file 照片
-     * @return
+     * @return ResultVO
      */
     @OptLog(optType = UPLOAD)
     @PostMapping("/admin/photos/upload")
@@ -44,8 +44,8 @@ public class PhotoController {
     /**
      * 根据相册id获取照片列表
      *
-     * @param conditionVO
-     * @return
+     * @param conditionVO conditionVO
+     * @return ResultVO
      */
     @GetMapping("/admin/photos")
     public ResultVO<PageResultDTO<PhotoAdminDTO>> listPhotos(ConditionVO conditionVO) {
@@ -55,8 +55,8 @@ public class PhotoController {
     /**
      * 更新照片信息
      *
-     * @param photoInfoVO
-     * @return
+     * @param photoInfoVO photoInfoVO
+     * @return ResultVO
      */
     @OptLog(optType = UPDATE)
     @PutMapping("/admin/photos")
@@ -68,8 +68,8 @@ public class PhotoController {
     /**
      * 保存照片
      *
-     * @param photoVO
-     * @return
+     * @param photoVO photoVO
+     * @return ResultVO
      */
     @OptLog(optType = SAVE)
     @PostMapping("/admin/photos")
@@ -81,8 +81,8 @@ public class PhotoController {
     /**
      * 移动照片相册
      *
-     * @param photoVO
-     * @return
+     * @param photoVO photoVO
+     * @return ResultVO
      */
     @OptLog(optType = UPDATE)
     @PutMapping("/admin/photos/album")
@@ -94,8 +94,8 @@ public class PhotoController {
     /**
      * 更新照片删除状态
      *
-     * @param deleteVO
-     * @return
+     * @param deleteVO deleteVO
+     * @return ResultVO
      */
     @OptLog(optType = UPDATE)
     @PutMapping("/admin/photos/delete")
@@ -107,8 +107,8 @@ public class PhotoController {
     /**
      * 删除照片
      *
-     * @param photoIds
-     * @return
+     * @param photoIds photoIds
+     * @return ResultVO
      */
     @OptLog(optType = DELETE)
     @DeleteMapping("/admin/photos")
@@ -120,8 +120,8 @@ public class PhotoController {
     /**
      * 根据相册id查看照片列表
      *
-     * @param albumId
-     * @return
+     * @param albumId albumId
+     * @return ResultVO
      */
     @GetMapping("/albums/{albumId}/photos")
     public ResultVO<PhotoDTO> listPhotosByAlbumId(@PathVariable("albumId") Integer albumId) {

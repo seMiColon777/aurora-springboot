@@ -7,7 +7,6 @@ import com.aurora.mapper.JobLogMapper;
 import com.aurora.util.ExceptionUtil;
 import com.aurora.util.SpringUtil;
 import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -24,24 +23,24 @@ public abstract class AbstractQuartzJob implements org.quartz.Job {
     private static final ThreadLocal<Date> THREAD_LOCAL = new ThreadLocal<>();
 
     @Override
-    public void execute(JobExecutionContext context) throws JobExecutionException {
+    public void execute(JobExecutionContext context) {
         Job job = new Job();
         BeanUtils.copyProperties(context.getMergedJobDataMap().get(ScheduleConstant.TASK_PROPERTIES), job);
         try {
-            before(context, job);
+            before();
             doExecute(context, job);
-            after(context, job, null);
+            after(job, null);
         } catch (Exception e) {
             log.error("任务执行异常:", e);
-            after(context, job, e);
+            after(job, e);
         }
     }
 
-    protected void before(JobExecutionContext context, Job job) {
+    protected void before() {
         THREAD_LOCAL.set(new Date());
     }
 
-    protected void after(JobExecutionContext context, Job job, Exception e) {
+    protected void after(Job job, Exception e) {
         Date startTime = THREAD_LOCAL.get();
         THREAD_LOCAL.remove();
         final JobLog jobLog = new JobLog();

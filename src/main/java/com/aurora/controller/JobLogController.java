@@ -28,8 +28,8 @@ public class JobLogController {
     /**
      * 获取定时任务的日志列表
      *
-     * @param jobLogSearchVO
-     * @return
+     * @param jobLogSearchVO jobLogSearchVO
+     * @return ResultVO
      */
     @GetMapping("/admin/jobLogs")
     public ResultVO<PageResultDTO<JobLogDTO>> listJobLogs(JobLogSearchVO jobLogSearchVO) {
@@ -39,8 +39,8 @@ public class JobLogController {
     /**
      * 删除定时任务的日志
      *
-     * @param ids
-     * @return
+     * @param ids ids
+     * @return ResultVO
      */
     @OptLog(optType = DELETE)
     @DeleteMapping("/admin/jobLogs")
@@ -52,7 +52,7 @@ public class JobLogController {
     /**
      * 清除定时任务的日志
      *
-     * @return
+     * @return ResultVO
      */
     @OptLog(optType = DELETE)
     @DeleteMapping("/admin/jobLogs/clean")
@@ -64,7 +64,7 @@ public class JobLogController {
     /**
      * 获取定时任务日志的所有组名
      *
-     * @return
+     * @return ResultVO
      */
     @GetMapping("/admin/jobLogs/jobGroups")
     public ResultVO<?> listJobLogGroups() {

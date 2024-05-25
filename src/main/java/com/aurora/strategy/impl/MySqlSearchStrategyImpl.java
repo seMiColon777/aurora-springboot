@@ -36,7 +36,7 @@ public class MySqlSearchStrategyImpl implements SearchStrategy {
                         .like(Article::getArticleContent, keywords)));
         return articles.stream().map(item -> {
                     boolean isLowerCase = true;
-                    String articleContent = item.getArticleContent();
+                    String articleContent;
                     int contentIndex = item.getArticleContent().indexOf(keywords.toLowerCase());
                     if (contentIndex == -1) {
                         contentIndex = item.getArticleContent().indexOf(keywords.toUpperCase());

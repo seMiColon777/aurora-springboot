@@ -3,6 +3,8 @@ package com.aurora.util;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.codec.binary.Hex;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
@@ -11,6 +13,8 @@ import java.util.Objects;
 
 @Log4j2
 public class FileUtil {
+
+    private static final Logger logger = LoggerFactory.getLogger(FileUtil.class);
 
     public static String getMd5(InputStream inputStream) {
         try {
@@ -22,7 +26,7 @@ public class FileUtil {
             }
             return new String(Hex.encodeHex(md5.digest()));
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("getMd5 error", e);
             return null;
         } finally {
             try {
@@ -30,7 +34,7 @@ public class FileUtil {
                     inputStream.close();
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error("getMd5 error", e);
             }
         }
     }
@@ -51,7 +55,7 @@ public class FileUtil {
             multipartFile.transferTo(file);
             file.deleteOnExit();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("multipartFileToFile error", e);
         }
         return file;
     }

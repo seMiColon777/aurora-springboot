@@ -34,7 +34,7 @@ public class TalkController {
     /**
      * 查看说说列表
      *
-     * @return
+     * @return ResultVO
      */
     @GetMapping("/talks")
     public ResultVO<PageResultDTO<TalkDTO>> listTalks() {
@@ -45,7 +45,7 @@ public class TalkController {
      * 根据id查看说说
      *
      * @param talkId 说说id
-     * @return
+     * @return ResultVO
      */
     @GetMapping("/talks/{talkId}")
     public ResultVO<TalkDTO> getTalkById(@PathVariable("talkId") Integer talkId) {
@@ -56,7 +56,7 @@ public class TalkController {
      * 上传说说图片
      *
      * @param file 说说图片
-     * @return
+     * @return ResultVO
      */
     @OptLog(optType = UPLOAD)
     @PostMapping("/admin/talks/images")
@@ -67,8 +67,8 @@ public class TalkController {
     /**
      * 保存或修改说说
      *
-     * @param talkVO
-     * @return
+     * @param talkVO talkVO
+     * @return ResultVO
      */
     @OptLog(optType = SAVE_OR_UPDATE)
     @PostMapping("/admin/talks")
@@ -80,8 +80,8 @@ public class TalkController {
     /**
      * 删除说说
      *
-     * @param talkIds
-     * @return
+     * @param talkIds talkIds
+     * @return ResultVO
      */
     @OptLog(optType = DELETE)
     @DeleteMapping("/admin/talks")
@@ -93,8 +93,8 @@ public class TalkController {
     /**
      * 查看后台说说
      *
-     * @param conditionVO
-     * @return
+     * @param conditionVO conditionVO
+     * @return ResultVO
      */
     @GetMapping("/admin/talks")
     public ResultVO<PageResultDTO<TalkAdminDTO>> listBackTalks(ConditionVO conditionVO) {
@@ -105,7 +105,7 @@ public class TalkController {
      * 根据id查看后台说说
      *
      * @param talkId 说说id
-     * @return
+     * @return ResultVO
      */
     @GetMapping("/admin/talks/{talkId}")
     public ResultVO<TalkAdminDTO> getBackTalkById(@PathVariable("talkId") Integer talkId) {

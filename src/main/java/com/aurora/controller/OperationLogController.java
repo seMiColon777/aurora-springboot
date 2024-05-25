@@ -28,8 +28,8 @@ public class OperationLogController {
     /**
      * 查看操作日志
      *
-     * @param conditionVO
-     * @return
+     * @param conditionVO conditionVO
+     * @return ResultVO
      */
     @GetMapping("/admin/operation/logs")
     public ResultVO<PageResultDTO<OperationLogDTO>> listOperationLogs(ConditionVO conditionVO) {
@@ -39,8 +39,8 @@ public class OperationLogController {
     /**
      * 删除操作日志
      *
-     * @param operationLogIds
-     * @return
+     * @param operationLogIds operationLogIds
+     * @return ResultVO
      */
     @OptLog(optType = DELETE)
     @DeleteMapping("/admin/operation/logs")

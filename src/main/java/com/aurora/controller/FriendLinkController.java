@@ -28,7 +28,7 @@ public class FriendLinkController {
     /**
      * 查看友链列表
      *
-     * @return
+     * @return ResultVO
      */
     @GetMapping("/links")
     public ResultVO<List<FriendLinkDTO>> listFriendLinks() {
@@ -38,8 +38,8 @@ public class FriendLinkController {
     /**
      * 查看后台友链列表
      *
-     * @param conditionVO
-     * @return
+     * @param conditionVO conditionVO
+     * @return ResultVO
      */
     @GetMapping("/admin/links")
     public ResultVO<PageResultDTO<FriendLinkAdminDTO>> listFriendLinkDTO(ConditionVO conditionVO) {
@@ -49,8 +49,8 @@ public class FriendLinkController {
     /**
      * 保存或修改友链
      *
-     * @param friendLinkVO
-     * @return
+     * @param friendLinkVO friendLinkVO
+     * @return ResultVO
      */
     @OptLog(optType = SAVE_OR_UPDATE)
     @PostMapping("/admin/links")
@@ -62,8 +62,8 @@ public class FriendLinkController {
     /**
      * 删除友链
      *
-     * @param linkIdList
-     * @return
+     * @param linkIdList linkIdList
+     * @return ResultVO
      */
     @OptLog(optType = DELETE)
     @DeleteMapping("/admin/links")

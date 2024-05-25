@@ -28,7 +28,7 @@ public class RoleController {
     /**
      * 查询用户角色选项
      *
-     * @return
+     * @return ResultVO
      */
     @GetMapping("/admin/users/role")
     public ResultVO<List<UserRoleDTO>> listUserRoles() {
@@ -39,8 +39,8 @@ public class RoleController {
     /**
      * 查询角色列表
      *
-     * @param conditionVO
-     * @return
+     * @param conditionVO conditionVO
+     * @return ResultVO
      */
     @GetMapping("/admin/roles")
     public ResultVO<PageResultDTO<RoleDTO>> listRoles(ConditionVO conditionVO) {
@@ -50,8 +50,8 @@ public class RoleController {
     /**
      * 保存或更新角色
      *
-     * @param roleVO
-     * @return
+     * @param roleVO roleVO
+     * @return ResultVO
      */
     @OptLog(optType = SAVE_OR_UPDATE)
     @PostMapping("/admin/role")
@@ -63,8 +63,8 @@ public class RoleController {
     /**
      * 删除角色
      *
-     * @param roleIdList
-     * @return
+     * @param roleIdList roleIdList
+     * @return ResultVO
      */
     @OptLog(optType = DELETE)
     @DeleteMapping("/admin/roles")

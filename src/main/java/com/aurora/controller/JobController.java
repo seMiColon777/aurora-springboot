@@ -24,8 +24,8 @@ public class JobController {
     /**
      * 添加定时任务
      *
-     * @param jobVO
-     * @return
+     * @param jobVO jobVO
+     * @return ResultVO
      */
     @OptLog(optType = SAVE)
     @PostMapping("/admin/jobs")
@@ -37,8 +37,8 @@ public class JobController {
     /**
      * 修改定时任务
      *
-     * @param jobVO
-     * @return
+     * @param jobVO jobVO
+     * @return ResultVO
      */
     @OptLog(optType = UPDATE)
     @PutMapping("/admin/jobs")
@@ -50,8 +50,8 @@ public class JobController {
     /**
      * 删除定时任务
      *
-     * @param jobIds
-     * @return
+     * @param jobIds jobIds
+     * @return ResultVO
      */
     @OptLog(optType = DELETE)
     @DeleteMapping("/admin/jobs")
@@ -63,8 +63,8 @@ public class JobController {
     /**
      * 根据id获取任务
      *
-     * @param jobId
-     * @return
+     * @param jobId jobId
+     * @return ResultVO
      */
     @GetMapping("/admin/jobs/{id}")
     public ResultVO<JobDTO> getJobById(@PathVariable("id") Integer jobId) {
@@ -74,8 +74,8 @@ public class JobController {
     /**
      * 获取任务列表
      *
-     * @param jobSearchVO
-     * @return
+     * @param jobSearchVO jobSearchVO
+     * @return ResultVO
      */
     @GetMapping("/admin/jobs")
     public ResultVO<PageResultDTO<JobDTO>> listJobs(JobSearchVO jobSearchVO) {
@@ -85,8 +85,8 @@ public class JobController {
     /**
      * 更改任务的状态
      *
-     * @param jobStatusVO
-     * @return
+     * @param jobStatusVO jobStatusVO
+     * @return ResultVO
      */
     @PutMapping("/admin/jobs/status")
     public ResultVO<?> updateJobStatus(@RequestBody JobStatusVO jobStatusVO) {
@@ -97,8 +97,8 @@ public class JobController {
     /**
      * 执行某个任务
      *
-     * @param jobRunVO
-     * @return
+     * @param jobRunVO jobRunVO
+     * @return ResultVO
      */
     @PutMapping("/admin/jobs/run")
     public ResultVO<?> runJob(@RequestBody JobRunVO jobRunVO) {
@@ -109,7 +109,7 @@ public class JobController {
     /**
      * 获取所有job分组
      *
-     * @return
+     * @return ResultVO
      */
     @GetMapping("/admin/jobs/jobGroups")
     public ResultVO<List<String>> listJobGroup() {

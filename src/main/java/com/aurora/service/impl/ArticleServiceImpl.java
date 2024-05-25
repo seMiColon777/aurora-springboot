@@ -1,7 +1,6 @@
 package com.aurora.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.aurora.model.dto.*;
 import com.aurora.entity.Article;
 import com.aurora.entity.ArticleTag;
 import com.aurora.entity.Category;
@@ -13,6 +12,8 @@ import com.aurora.mapper.ArticleMapper;
 import com.aurora.mapper.ArticleTagMapper;
 import com.aurora.mapper.CategoryMapper;
 import com.aurora.mapper.TagMapper;
+import com.aurora.model.dto.*;
+import com.aurora.model.vo.*;
 import com.aurora.service.ArticleService;
 import com.aurora.service.ArticleTagService;
 import com.aurora.service.RedisService;
@@ -22,11 +23,12 @@ import com.aurora.strategy.context.UploadStrategyContext;
 import com.aurora.util.BeanCopyUtil;
 import com.aurora.util.PageUtil;
 import com.aurora.util.UserUtil;
-import com.aurora.model.vo.*;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.SneakyThrows;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -41,12 +43,15 @@ import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 import static com.aurora.constant.RabbitMQConstant.SUBSCRIBE_EXCHANGE;
-import static com.aurora.constant.RedisConstant.*;
-import static com.aurora.enums.ArticleStatusEnum.*;
+import static com.aurora.constant.RedisConstant.ARTICLE_ACCESS;
+import static com.aurora.constant.RedisConstant.ARTICLE_VIEWS_COUNT;
+import static com.aurora.enums.ArticleStatusEnum.DRAFT;
 import static com.aurora.enums.StatusCodeEnum.ARTICLE_ACCESS_FAIL;
 
 @Service
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService {
+
+    private static final Logger logger = LoggerFactory.getLogger(ArticleServiceImpl.class);
 
     @Autowired
     private ArticleMapper articleMapper;
@@ -82,14 +87,14 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     @Override
     public TopAndFeaturedArticlesDTO listTopAndFeaturedArticles() {
         List<ArticleCardDTO> articleCardDTOs = articleMapper.listTopAndFeaturedArticles();
-        if (articleCardDTOs.size() == 0) {
+        if (articleCardDTOs.isEmpty()) {
             return new TopAndFeaturedArticlesDTO();
         } else if (articleCardDTOs.size() > 3) {
             articleCardDTOs = articleCardDTOs.subList(0, 3);
         }
         TopAndFeaturedArticlesDTO topAndFeaturedArticlesDTO = new TopAndFeaturedArticlesDTO();
-        topAndFeaturedArticlesDTO.setTopArticle(articleCardDTOs.get(0));
-        articleCardDTOs.remove(0);
+        topAndFeaturedArticlesDTO.setTopArticle(articleCardDTOs.getFirst());
+        articleCardDTOs.removeFirst();
         topAndFeaturedArticlesDTO.setFeaturedArticles(articleCardDTOs);
         return topAndFeaturedArticlesDTO;
     }
@@ -308,7 +313,6 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
                 String url = uploadStrategyContext.executeUploadStrategy(article.getArticleTitle() + FileExtEnum.MD.getExtName(), inputStream, FilePathEnum.MD.getPath());
                 urls.add(url);
             } catch (Exception e) {
-                e.printStackTrace();
                 throw new BizException("导出文章失败");
             }
         }
@@ -348,7 +352,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
                     .in(Tag::getTagName, tagNames));
             List<String> existTagNames = existTags.stream()
                     .map(Tag::getTagName)
-                    .collect(Collectors.toList());
+                    .toList();
             List<Integer> existTagIds = existTags.stream()
                     .map(Tag::getId)
                     .collect(Collectors.toList());
@@ -361,7 +365,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
                 tagService.saveBatch(tags);
                 List<Integer> tagIds = tags.stream()
                         .map(Tag::getId)
-                        .collect(Collectors.toList());
+                        .toList();
                 existTagIds.addAll(tagIds);
             }
             List<ArticleTag> articleTags = existTagIds.stream().map(item -> ArticleTag.builder()

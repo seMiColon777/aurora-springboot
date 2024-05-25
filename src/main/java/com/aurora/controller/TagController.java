@@ -30,7 +30,7 @@ public class TagController {
     /**
      * 获取所有标签
      *
-     * @return
+     * @return ResultVO
      */
     @GetMapping("/tags/all")
     public ResultVO<List<TagDTO>> getAllTags() {
@@ -40,7 +40,7 @@ public class TagController {
     /**
      * 获取前十个标签
      *
-     * @return
+     * @return ResultVO
      */
     @GetMapping("/tags/topTen")
     public ResultVO<List<TagDTO>> getTopTenTags() {
@@ -50,8 +50,8 @@ public class TagController {
     /**
      * 查询后台标签列表
      *
-     * @param conditionVO
-     * @return
+     * @param conditionVO conditionVO
+     * @return ResultVO
      */
     @GetMapping("/admin/tags")
     public ResultVO<PageResultDTO<TagAdminDTO>> listTagsAdmin(ConditionVO conditionVO) {
@@ -61,8 +61,8 @@ public class TagController {
     /**
      * 搜索文章标签
      *
-     * @param condition
-     * @return
+     * @param condition condition
+     * @return ResultVO
      */
     @GetMapping("/admin/tags/search")
     public ResultVO<List<TagAdminDTO>> listTagsAdminBySearch(ConditionVO condition) {
@@ -72,8 +72,8 @@ public class TagController {
     /**
      * 添加或修改标签
      *
-     * @param tagVO
-     * @return
+     * @param tagVO tagVO
+     * @return ResultVO
      */
     @OptLog(optType = SAVE_OR_UPDATE)
     @PostMapping("/admin/tags")
@@ -85,8 +85,8 @@ public class TagController {
     /**
      * 删除标签
      *
-     * @param tagIdList
-     * @return
+     * @param tagIdList tagIdList
+     * @return ResultVO
      */
     @OptLog(optType = DELETE)
     @DeleteMapping("/admin/tags")

@@ -26,8 +26,8 @@ public class UserInfoController {
     /**
      * 更新用户信息
      *
-     * @param userInfoVO
-     * @return
+     * @param userInfoVO userInfoVO
+     * @return ResultVO
      */
     @OptLog(optType = UPDATE)
     @PutMapping("/users/info")
@@ -40,7 +40,7 @@ public class UserInfoController {
      * 更新用户头像
      *
      * @param file 用户头像
-     * @return
+     * @return ResultVO
      */
     @OptLog(optType = UPDATE)
     @PostMapping("/users/avatar")
@@ -51,8 +51,8 @@ public class UserInfoController {
     /**
      * 绑定用户邮箱
      *
-     * @param emailVO
-     * @return
+     * @param emailVO emailVO
+     * @return ResultVO
      */
     @OptLog(optType = UPDATE)
     @PutMapping("/users/email")
@@ -64,8 +64,8 @@ public class UserInfoController {
     /**
      * 修改用户的订阅状态
      *
-     * @param subscribeVO
-     * @return
+     * @param subscribeVO subscribeVO
+     * @return ResultVO
      */
     @OptLog(optType = UPDATE)
     @PutMapping("/users/subscribe")
@@ -77,8 +77,8 @@ public class UserInfoController {
     /**
      * 修改用户角色
      *
-     * @param userRoleVO
-     * @return
+     * @param userRoleVO userRoleVO
+     * @return ResultVO
      */
     @OptLog(optType = UPDATE)
     @PutMapping("/admin/users/role")
@@ -90,8 +90,8 @@ public class UserInfoController {
     /**
      * 修改用户禁用状态
      *
-     * @param userDisableVO
-     * @return
+     * @param userDisableVO userDisableVO
+     * @return ResultVO
      */
     @OptLog(optType = UPDATE)
     @PutMapping("/admin/users/disable")
@@ -103,8 +103,8 @@ public class UserInfoController {
     /**
      * 查看在线用户
      *
-     * @param conditionVO
-     * @return
+     * @param conditionVO conditionVO
+     * @return ResultVO
      */
     @GetMapping("/admin/users/online")
     public ResultVO<PageResultDTO<UserOnlineDTO>> listOnlineUsers(ConditionVO conditionVO) {
@@ -114,8 +114,8 @@ public class UserInfoController {
     /**
      * 下线用户
      *
-     * @param userInfoId
-     * @return
+     * @param userInfoId userInfoId
+     * @return ResultVO
      */
     @OptLog(optType = DELETE)
     @DeleteMapping("/admin/users/{userInfoId}/online")
@@ -127,8 +127,8 @@ public class UserInfoController {
     /**
      * 根据id获取用户信息
      *
-     * @param userInfoId
-     * @return
+     * @param userInfoId userInfoId
+     * @return ResultVO
      */
     @GetMapping("/users/info/{userInfoId}")
     public ResultVO<UserInfoDTO> getUserInfoById(@PathVariable("userInfoId") Integer userInfoId) {

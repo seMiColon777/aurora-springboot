@@ -20,7 +20,7 @@ public class JobInvokeUtil {
             Object bean = SpringUtil.getBean(beanName);
             invokeMethod(bean, methodName, methodParams);
         } else {
-            Object bean = Class.forName(beanName).newInstance();
+            Object bean = Class.forName(beanName).getDeclaredConstructor().newInstance();
             invokeMethod(bean, methodName, methodParams);
         }
     }
@@ -28,7 +28,7 @@ public class JobInvokeUtil {
     private static void invokeMethod(Object bean, String methodName, List<Object[]> methodParams)
             throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
-        if (methodParams != null && methodParams.size() > 0) {
+        if (methodParams != null && !methodParams.isEmpty()) {
             Method method = bean.getClass().getDeclaredMethod(methodName, getMethodParamsType(methodParams));
             method.invoke(bean, getMethodParamsValue(methodParams));
         } else {

@@ -63,11 +63,11 @@ public class EsSearchStrategyImpl implements SearchStrategy {
                 ArticleSearchDTO article = hit.getContent();
                 List<String> titleHighLightList = hit.getHighlightFields().get("articleTitle");
                 if (CollectionUtils.isNotEmpty(titleHighLightList)) {
-                    article.setArticleTitle(titleHighLightList.get(0));
+                    article.setArticleTitle(titleHighLightList.getFirst());
                 }
                 List<String> contentHighLightList = hit.getHighlightFields().get("articleContent");
                 if (CollectionUtils.isNotEmpty(contentHighLightList)) {
-                    article.setArticleContent(contentHighLightList.get(contentHighLightList.size() - 1));
+                    article.setArticleContent(contentHighLightList.getLast());
                 }
                 return article;
             }).collect(Collectors.toList());

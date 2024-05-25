@@ -27,7 +27,7 @@ public class UserAuthController {
      * 发送邮箱验证码
      *
      * @param username 用户名
-     * @return
+     * @return ResultVO
      */
     @AccessLimit(seconds = 60,maxCount = 1)
     @GetMapping("/users/code")
@@ -39,8 +39,8 @@ public class UserAuthController {
     /**
      * 获取用户区域分布
      *
-     * @param conditionVO
-     * @return
+     * @param conditionVO conditionVO
+     * @return ResultVO
      */
     @GetMapping("/admin/users/area")
     public ResultVO<List<UserAreaDTO>> listUserAreas(ConditionVO conditionVO) {
@@ -50,8 +50,8 @@ public class UserAuthController {
     /**
      * 查询后台用户列表
      *
-     * @param conditionVO
-     * @return
+     * @param conditionVO conditionVO
+     * @return ResultVO
      */
     @GetMapping("/admin/users")
     public ResultVO<PageResultDTO<UserAdminDTO>> listUsers(ConditionVO conditionVO) {
@@ -61,8 +61,8 @@ public class UserAuthController {
     /**
      * 用户注册
      *
-     * @param userVO
-     * @return
+     * @param userVO userVO
+     * @return ResultVO
      */
     @PostMapping("/users/register")
     public ResultVO<?> register(@Valid @RequestBody UserVO userVO) {
@@ -73,8 +73,8 @@ public class UserAuthController {
     /**
      * 修改密码
      *
-     * @param user
-     * @return
+     * @param user user
+     * @return ResultVO
      */
     @OptLog(optType = UPDATE)
     @PutMapping("/users/password")
@@ -86,8 +86,8 @@ public class UserAuthController {
     /**
      * 修改管理员密码
      *
-     * @param passwordVO
-     * @return
+     * @param passwordVO passwordVO
+     * @return ResultVO
      */
     @OptLog(optType = UPDATE)
     @PutMapping("/admin/users/password")
@@ -99,7 +99,7 @@ public class UserAuthController {
     /**
      * 用户登出
      *
-     * @return
+     * @return ResultVO
      */
     @PostMapping("/users/logout")
     public ResultVO<UserLogoutStatusDTO> logout() {
@@ -109,8 +109,8 @@ public class UserAuthController {
     /**
      * qq登录
      *
-     * @param qqLoginVO
-     * @return
+     * @param qqLoginVO qqLoginVO
+     * @return ResultVO
      */
     @PostMapping("/users/oauth/qq")
     public ResultVO<UserInfoDTO> qqLogin(@Valid @RequestBody QQLoginVO qqLoginVO) {

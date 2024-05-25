@@ -34,7 +34,7 @@ public class AuroraInfoController {
     /**
      * 上报访客信息
      *
-     * @return
+     * @return ResultVO
      */
     @PostMapping("/report")
     public ResultVO<?> report() {
@@ -45,7 +45,7 @@ public class AuroraInfoController {
     /**
      * 获取系统信息
      *
-     * @return
+     * @return ResultVO
      */
     @GetMapping("/")
     public ResultVO<AuroraHomeInfoDTO> getBlogHomeInfo() {
@@ -55,7 +55,7 @@ public class AuroraInfoController {
     /**
      * 获取系统后台信息
      *
-     * @return
+     * @return ResultVO
      */
     @GetMapping("/admin")
     public ResultVO<AuroraAdminInfoDTO> getBlogBackInfo() {
@@ -65,8 +65,8 @@ public class AuroraInfoController {
     /**
      * 更新网站配置
      *
-     * @param websiteConfigVO
-     * @return
+     * @param websiteConfigVO websiteConfigVO
+     * @return ResultVO
      */
     @OptLog(optType = UPDATE)
     @PutMapping("/admin/website/config")
@@ -78,7 +78,7 @@ public class AuroraInfoController {
     /**
      * 获取网站配置
      *
-     * @return
+     * @return ResultVO
      */
     @GetMapping("/admin/website/config")
     public ResultVO<WebsiteConfigDTO> getWebsiteConfig() {
@@ -88,7 +88,7 @@ public class AuroraInfoController {
     /**
      * 查看关于我信息
      *
-     * @return
+     * @return ResultVO
      */
     @GetMapping("/about")
     public ResultVO<AboutDTO> getAbout() {
@@ -98,8 +98,8 @@ public class AuroraInfoController {
     /**
      * 修改关于我信息
      *
-     * @param aboutVO
-     * @return
+     * @param aboutVO aboutVO
+     * @return ResultVO
      */
     @OptLog(optType = UPDATE)
     @PutMapping("/admin/about")
@@ -112,7 +112,7 @@ public class AuroraInfoController {
      * 上传博客配置图片
      *
      * @param file 图片
-     * @return
+     * @return ResultVO
      */
     @OptLog(optType = UPLOAD)
     @PostMapping("/admin/config/images")
